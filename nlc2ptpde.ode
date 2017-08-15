@@ -1,0 +1,38 @@
+# p-t coupling
+# nonlinear coupled CRD equations
+
+a0'=f(a0,b0)+D*(a1-a0)
+#pp0'=-0.01*(upr1-upr0)/2*h
+a[1..55]'=D*(a[j+1]-2*a[j]+a[j-1])+f(a[j],b[j])
+a56'=f(a56,b56)+D*(a55-a56)
+#pp56'=-0.01*(upr56-upr55)/2*h
+b0'=g(a0,b0)+0*(b1-b0)
+#pp0'=-0.01*(upr1-upr0)/2*h
+b[1..55]'=0*(b[j+1]-2*b[j]+b[j-1])+g(a[j],b[j])
+b56'=g(a56,b56)+0*(b55-b56)
+
+
+#tp0'=g(alpha0,pp0,tp0)+(dp/(h^2*dnt))*(tp1-tp0)-uu[0]*(tp1-tp0)/2*h
+#tp[1..55]'=(dp/(h^2*dnt))*(tp[j+1]-2*tp[j]+tp[j-1])-uu[j]*(tp[j+1]-tp[j-1])/(2*h)+g(alpha[j],pp[j],tp[j])
+#tp56'=g(alpha56,pp56,tp56)+(dp/(h^2*dnt))*(tp55-tp56)-uu[56]*(tp56-tp55)/2*h
+
+
+#upr0'=upr0*uf(alpha0,pp0,tp0)+(dupr/(dnt*h^2))*(upr1-upr0)-uu[0]*(upr1-upr0)/2*h
+#upr0'=-0.01*(pp1-pp0)/2*h
+#upr[1..55]'=(dupr/(h^2*dnt))*(upr[j+1]-2*upr[j]+upr[j-1])-uu[j]*(upr[j+1]-upr[j-1])/(2*h)+upr[j]*uf(alpha[j],pp[j],tp[j])
+#upr56'=upr[56]*uf(alpha56,pp56,tp56)+(dupr/(h^2*dnt))*(tp55-tp56)-uu[56]*(upr56-upr55)/2*h
+#upr56'=-0.01*(pp56-pp55)/2*h
+
+f(a,b)=alpha*b-beta*a+gamma
+g(a,b)=mu*a-(0.1*b^3-6.3*b^2+100*b)
+#uf(alpha,pp,tp)=alpha*pp^2+theta(alpha)*tp*pp+vartheta(alpha)*tp^2+lam
+#init pp[24..26]=0.001
+#init tp[24..26]=0.001
+#init pp[27..29]=0.01
+#init tp[27..29]=0.01
+init b[0..56]=2
+init a[0..56]=2
+#init upr[24..26]=0.001
+par alpha=11.8,beta=1,gamma=0,mu=1,D=0
+@total=5,dt=0.005
+

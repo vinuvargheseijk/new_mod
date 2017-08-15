@@ -1,0 +1,9 @@
+x'=rho*x^2/(yr+yl)-mu1*x
+yr'=-alpha*yr+alpha*yl+rho*x^2-mu2*(yr+yl)
+yl'=alpha*yr-alpha*yl+rho*x^2-mu2*(yr+yl)
+@xlo=-0.25,xhi=2.25,ylo=-0.25,yhi=2.25
+@nmesh=200
+@xp=x,yp=y
+parameter alpha=0.1, mu1=0.1, mu2=0.1, rho=0.1
+@background=white
+done
