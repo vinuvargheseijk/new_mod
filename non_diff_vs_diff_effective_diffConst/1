@@ -70,8 +70,8 @@ def makeModel():
     moose.connect(r2,'sub',a,'reac')
     moose.connect(r2,'sub',c,'reac')
     moose.connect(r2,'prd',d,'reac')
-    r2.Kf=5
-    r2.Kb=1
+    r2.Kf=7
+    r2.Kb=0
 
     #moose.connect( e1, 'sub', s, 'reac' )
     #moose.connect( e1, 'prd', a, 'reac' )
@@ -122,7 +122,7 @@ def makeModel():
 #    a.vec[50].concInit *= 1.2 # slight perturbation at one end.
     #a.vec[60].concInit *= 1.2
     #a.vec[40].concInit *= 1.2
-    a.vec[0].concInit = 3
+    a.vec[0].concInit = 7
     #a.vec[30].concInit *= 1.2
     #a.vec[50].concInit *= 1.2
     #b.vec[99].concInit *= 0.5
@@ -131,7 +131,7 @@ def makeModel():
        #c.vec[i].concInit = 0.5
        #d.vec[i].concInit = 0.5
       # print i
-    c.vec[0].concInit = 1
+    c.vec[0].concInit = 3
     d.vec[0].concInit = 0
     #c.vec[30].concInit = 0.5
     #d.vec[30].concInit = 0.5
@@ -172,7 +172,7 @@ def displayPlots():
 def main():
     global num
     num = 100
-    runtime = 40
+    runtime = 15
     makeModel()
     dsolve = moose.element( '/model/dsolve' )
     moose.reinit()
@@ -188,31 +188,16 @@ def main():
     maxFWHH = []
     r2=moose.element('/model/compartment/r2')
     trialNum = str(c.diffConst)+str(r2.Kf)+str(r2.Kb)
-    plt.ion()
-    
-    #fig = plt.figure( figsize=(12,10) )
-    #png = fig.add_subplot(211)
-  #  imgplot = plt.imshow( img )
-    #ax = fig.add_subplot(212)
-    #ax.set_ylim( 0, 2 )
-    #plt.ylabel( 'Conc (mM)' )
-    #plt.xlabel( 'Position along cylinder (microns)' )
-    #pos = numpy.arange( 0, a.vec.conc.size, 1 )
-    #timeLabel = plt.text(60, 0.4, 'time = 0')
-    #line1, = ax.plot( pos, a.vec.conc, label='a' )
-    #line2, = ax.plot( pos, b.vec.conc, label='c' )
-    #line3, = ax.plot( pos, b.vec.conc, label='d' )
-    #plt.legend()
-    #fig.canvas.draw()
+
     for t in range( 0, runtime):
-        moose.start(0.5 )
+        moose.start(1 )
         aList = a.vec.conc
         maxa = max(aList)
         #indMax = numpy.where(aList==maxa)
         #indMax = num/2
         indMax = 0
         halfMax = maxa/2
-        indHalfMax = (numpy.abs(aList[0:num]-halfMax)).argmin()
+        indHalfMax = (numpy.abs(aList[0:num/2]-halfMax)).argmin()
         #print 'maximum value is', maxa, 'postion is', numpy.where(aList==maxa)
         print 'maximum value is', maxa
         print 'half height is at', indHalfMax
@@ -223,11 +208,10 @@ def main():
         timeArr.append(t)
         #line1.set_ydata( a.vec.conc )
         #line2.set_ydata( b.vec.conc )
-        #line2.set_ydata( c.vec.conc )
-        #line3.set_ydata( d.vec.conc )
+        #line3.set_ydata( c.vec.conc )
+        #line4.set_ydata( d.vec.conc )
         #timeLabel.set_text( "time = %d" % t )
         #fig.canvas.draw()
-        print 'minimum and maximum of a', min(a.vec.conc), max(a.vec.conc)
 
     maxFWHH.append(max(halfWidth))       
     print 'max FWHH is', max(halfWidth)
