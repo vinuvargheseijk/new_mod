@@ -38,7 +38,7 @@ def makeModel():
     # create container for model
     r0 = 1e-6	# m
     r1 = 1e-6	# m
-    diffLength = 1e-6 # m
+    diffLength = 2e-6 # m
     len = num * diffLength	# m
     diffConst = 1e-12 # m^2/sec
     motorRate = 1e-6 # m/sec
@@ -214,10 +214,12 @@ def main():
         #anC.append((10/numpy.sqrt(4*numpy.pi*a.diffConst*1))*numpy.exp(-(i**2)/4*a.diffConst*1))
         #print mm[i].Coordinates[0]
         anC.append(2.0*diffL*(3.0/(math.sqrt(4*math.pi*a.diffConst*4)))*math.exp(-(mm[i].Coordinates[0]**2)/(4*a.diffConst*4)))
+        #print diffL*(3.0/(math.sqrt(4*math.pi*a.diffConst*4)))*math.exp(-(mm[i].Coordinates[0]**2)/(4*a.diffConst*4))
         #anC.append(4*diffL**2*(3/(4*numpy.pi*j[1]*numpy.sqrt(a.diffConst*a.diffConst)))*numpy.exp(-(mm[i].Coordinates[0]**2)/(4*a.diffConst*j[1])-j[0]/(4*a.diffConst*j[1])))
         # anC.append(4*diffL**2*(3/(4*numpy.pi*4*numpy.sqrt(4*numpy.pi*4*a.diffConst*a.diffConst*a.diffConst)))*numpy.exp(-(mm[i].Coordinates[0]**2)/(4*a.diffConst*4)-(mm[i].Coordinates[0]**2)/(4*a.diffConst*4)-j/(4*a.diffConst*4)))
         #print (3/(numpy.sqrt(4*numpy.pi*a.diffConst*1)))*numpy.exp(-(mm[i].Coordinates[0]**2)/(4*a.diffConst*1))
-      print 'analaytical sum is',sum(anC), 'max of anC is', max(anC)
+      firstCell=diffL*(3.0/(math.sqrt(4*math.pi*a.diffConst*4)))*math.exp(-(mm[0].Coordinates[0]**2)/(4*a.diffConst*4))
+      print 'analaytical sum is',sum(anC)-firstCell, 'max of anC is', max(anC)
       plt.plot(anC)
     raw_input()
     time = 0    
