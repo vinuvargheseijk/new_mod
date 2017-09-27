@@ -1,0 +1,7 @@
+r1r'=(5/(1+rho1rho^3))*(2-r1r-r2r)-r1r
+rho1rho'=(3+2*(e1e^3/(1+e1e^3)))*(1/(1+r1r^3))*(2-rho1rho-rho2rho)-rho1rho
+e1e'=0.1*((0.2+0.3*r1r^3/(0.85^3+r1r^3))-e1e^2*(0.2+rho1rho^3/(0.85^3+rho1rho^3)))
+r2r'=(5/(1+rho2rho^3))*(2-r1r-r2r)-r2r
+rho2rho'=(3+2*(e2e^3/(1+e2e^3)))*(1/(1+r2r^3))*(2-rho1rho-rho2rho)-rho2rho
+e2e'=0.1*((0.2+0.3*r2r^3/(0.85^3+r2r^3))-e2e^2*(0.2+rho2rho^3/(0.85^3+rho2rho^3)))
+init r1r=0.1,rho1rho=0.1,e1e=0.1,r2r=0.2,rho2rho=0.2,e2e=0.2

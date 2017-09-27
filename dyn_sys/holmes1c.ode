@@ -1,0 +1,13 @@
+r1r'=1*(0.5/(1+rho1rho))*(1-r1r-r2r)-r1r
+rho1rho'=1*(5*e1e/(1+r1r))*(1-rho1rho-rho2rho)-rho1rho
+#e1e'=10*((1+0.75*r1r)*e1e-((0.1+1.5*rho1rho)*e1e^2+e1e*e2e))
+om1om'=0.001*(0.75*r1r-om1om)
+c1k'=0.001*(1*rho1rho-c1k)
+e1e' =0.01*((1+om1om)*e2e-((0.1+c1k)*e2e^2+1*e2e*e1e))
+r2r'=1*(0.5/(1+rho2rho))-r2r
+rho2rho'=1*(5*e2e/(1+r2r))-rho2rho
+om2om'=0.001*(0.75*r2r-om2om)
+c2k'=0.001*(1*rho2rho-c2k)
+#e2e'=10*((1+0.75*r2r)*e2e-((0.1+1.5*rho2rho)*e2e^2+e1e*e2e))
+e2e' =0.01*((1+om2om)*e2e-((0.1+c2k)*e2e^2+1*e2e*e1e))
+init r1r = 0.2, rho1rho = 0.2, e1e =0.2, r2r = 0.1, rho2rho = 0.1, e2e =0.1
